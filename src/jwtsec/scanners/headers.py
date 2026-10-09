@@ -14,7 +14,7 @@ from jwtsec.models.vulnerability import (
 class HeaderInjectionScanner:
     """Audits JWT header parameters for injection payloads and dangerous configurations."""
 
-    _PATH_TRAVERSAL = re.compile(r"(\.\./|\.\.\\|/etc/|/dev/null|C:\\)")
+    _PATH_TRAVERSAL = re.compile(r"(\.\./|\.\.\\|/etc/|/dev/null|C:\\|%00|\x00)")
     _SQL_INJECTION = re.compile(r"('|\bOR\b|\bUNION\b|\bSELECT\b|--|#|/\*)", re.IGNORECASE)
     _COMMAND_INJECTION = re.compile(r"(;|\||`|\$\()", re.IGNORECASE)
 

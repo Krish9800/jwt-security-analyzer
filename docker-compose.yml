@@ -1,0 +1,21 @@
+services:
+  jwtsec:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jwtsec:latest
+    container_name: jwtsec-service
+    ports:
+      - "8082:8082"
+    environment:
+      - JWTSEC_ENVIRONMENT=production
+      - JWTSEC_DEBUG=false
+      - JWTSEC_ALLOW_NONE_ALGORITHM=false
+      - JWTSEC_ENABLE_BRUTEFORCE=true
+      - JWTSEC_LAB_PORT=8082
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
